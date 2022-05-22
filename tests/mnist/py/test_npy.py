@@ -3,14 +3,15 @@ import torch
 import numpy as np
 from img import load_image
 import sys
+
 np.set_printoptions(threshold=sys.maxsize)
 
 im_data = load_image()
-#print(im_data.numpy().transpose(0, 2, 3, 1))
+# print(im_data.numpy().transpose(0, 2, 3, 1))
 conv0_weight = torch.from_numpy(np.load('conv0.0.weight.npy'))
-#print(conv0_weight.numpy().transpose(0, 2, 3, 1))
+# print(conv0_weight.numpy().transpose(0, 2, 3, 1))
 conv0_bias = torch.from_numpy(np.load('conv0.0.bias.npy'))
-#print(conv0_bias.numpy())
+# print(conv0_bias.numpy())
 y = f.conv2d(im_data, conv0_weight, conv0_bias, stride=(1, 1), padding=(2, 2))
 y = f.relu(y)
 
@@ -23,7 +24,7 @@ y = f.conv2d(y, conv1_weight, conv1_bias, stride=(1, 1), padding=(2, 2))
 y = f.relu(y)
 
 y = f.max_pool2d(y, kernel_size=2, stride=2, padding=0)
-#print(y.numpy().transpose(0, 2, 3, 1))
+# print(y.numpy().transpose(0, 2, 3, 1))
 y = y.view(y.size(0), -1)
 
 out_weight = torch.from_numpy(np.load('out.weight.npy'))
