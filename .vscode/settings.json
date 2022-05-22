@@ -49,7 +49,9 @@
         "streambuf": "cpp",
         "typeinfo": "cpp",
         "bit": "cpp",
-        "stdarg.h": "c"
+        "stdarg.h": "c",
+        "immintrin.h": "c",
+        "intrin.h": "c"
     },
     "python.analysis.extraPaths": [
         "${workspaceFolder}/tools"

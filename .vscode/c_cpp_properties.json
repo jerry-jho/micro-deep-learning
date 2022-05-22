@@ -4,7 +4,8 @@
             "name": "Linux",
             "includePath": [
                 "${workspaceFolder}/**",
-                "/usr/include"
+                "/usr/include",
+                "/usr/lib/llvm-9/lib/clang/9.0.0/include"
             ],
             "defines": [],
             "cStandard": "c17",
