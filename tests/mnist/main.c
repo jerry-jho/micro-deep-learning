@@ -1,17 +1,17 @@
 #include <udl.h>
 
 int main(int argc, char ** argv) {
-  tensor4d_t im_data      = udl_tensor_load(1,28,28,1,type_main,"im_data.bin");
-  tensor4d_t conv0_weight = udl_tensor_load(16,5,5,1,type_main,"conv0.0.weight.bin");
-  tensor4d_t conv0_bias   = udl_tensor_load(1,1,2,16,type_aux,"conv0.0.bias.bin");
+  tensor4d_t im_data      = udl_tensor_load(1,28,28,1,type_main,"cdata/im_data.bin");
+  tensor4d_t conv0_weight = udl_tensor_load(16,5,5,1,type_main,"cdata/conv0.0.weight.bin");
+  tensor4d_t conv0_bias   = udl_tensor_load(1,1,2,16,type_aux,"cdata/conv0.0.bias.bin");
   tensor4d_t conv0_out    = udl_tensor_create(1,28,28,16,type_main,content_zeros);
   tensor4d_t pool0_out    = udl_tensor_create(1,14,14,16,type_main,content_zeros);
-  tensor4d_t conv1_weight = udl_tensor_load(32,5,5,16,type_main,"conv1.0.weight.bin");
-  tensor4d_t conv1_bias   = udl_tensor_load(1,1,2,32,type_aux,"conv1.0.bias.bin");
+  tensor4d_t conv1_weight = udl_tensor_load(32,5,5,16,type_main,"cdata/conv1.0.weight.bin");
+  tensor4d_t conv1_bias   = udl_tensor_load(1,1,2,32,type_aux,"cdata/conv1.0.bias.bin");
   tensor4d_t conv1_out    = udl_tensor_create(1,14,14,32,type_main,content_zeros);
   tensor4d_t pool1_out    = udl_tensor_create(1,7,7,32,type_main,content_zeros);
-  tensor4d_t dense_weight = udl_tensor_load(10,1,1,7*7*32,type_main,"out.weight.bin");
-  tensor4d_t dense_bias   = udl_tensor_load(1,1,2,10,type_aux,"out.bias.bin");
+  tensor4d_t dense_weight = udl_tensor_load(10,1,1,7*7*32,type_main,"cdata/out.weight.bin");
+  tensor4d_t dense_bias   = udl_tensor_load(1,1,2,10,type_aux,"cdata/out.bias.bin");
   tensor4d_t dense_out    = udl_tensor_create(1,1,1,10,type_main,content_zeros);
   conv2d_desc_t conv0_desc = {.active = active_type_relu, .px = 2, .py = 2, .sx = 1, .sy = 1};
   maxpooling2d_desc_t pool0_desc = {.active = active_type_linear, .px = 0, .py = 0, .sx = 2, .sy = 2, .kh = 2, .kw = 2};
