@@ -63,6 +63,23 @@ tensor4d_t udl_tensor_create(s_t B, s_t H, s_t W, s_t C, type_t ttype, content_t
   return udl_tensor_create_alike(&t, content);
 }
 
+tensor4d_t udl_tensor_from_buffer(s_t B, s_t H, s_t W, s_t C, type_t ttype, void * source) {
+  tensor4d_t t;
+  t.shape[0] = B;
+  t.shape[1] = H;
+  t.shape[2] = W;
+  t.shape[3] = C;
+  t.ttype = ttype;
+  t.m = NULL;
+  t.a = NULL;
+  if (ttype == type_main) {
+    t.m = (m_t*)source;
+  } else {
+    t.a = (a_t*)source;
+  }
+  return t;
+}
+
 tensor4d_t udl_tensor_load(s_t B, s_t H, s_t W, s_t C, type_t ttype, void * source) {
   tensor4d_t t;
   t.shape[0] = B;

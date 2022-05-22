@@ -93,6 +93,7 @@ tensor4d_t udl_tensor_create(s_t B, s_t H, s_t W, s_t C, type_t ttype, content_t
 tensor4d_t udl_tensor_create_alike(tensor4d_t * s, content_t content);
 tensor4d_t udl_tensor_copy(tensor4d_t * s);
 tensor4d_t udl_tensor_load(s_t B, s_t H, s_t W, s_t C, type_t ttype, void * source);
+tensor4d_t udl_tensor_from_buffer(s_t B, s_t H, s_t W, s_t C, type_t ttype, void * source);
 result_t udl_tensor_reshape(tensor4d_t * s, s_t B, s_t H, s_t W, s_t C);
 s_t udl_tensor_argmax(tensor4d_t * s);
 void udl_tensor_print(tensor4d_t * t);

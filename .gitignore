@@ -2,3 +2,5 @@ __pycache__
 test
 build
 tests/mnist/py/data
+*.npy
+tests/resnet50
