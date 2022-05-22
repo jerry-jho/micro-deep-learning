@@ -48,7 +48,8 @@
         "stdexcept": "cpp",
         "streambuf": "cpp",
         "typeinfo": "cpp",
-        "bit": "cpp"
+        "bit": "cpp",
+        "stdarg.h": "c"
     },
     "python.analysis.extraPaths": [
         "${workspaceFolder}/tools"

@@ -19,7 +19,7 @@ void udl_putc(char c) {
 }
 
 int udl_puts(char * s) {
-  int i;
+  int i = 0;
   while(*s) {
     udl_putc(*s++);
     i++;

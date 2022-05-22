@@ -5,8 +5,8 @@ SRC:=$(UDL)/src
 TARGETS:=os generic
 BUILD:=$(PWD)/build
 CROSS:=
-CROSS_CFLGAS:=
-CROSS_LDFLGAS:=
+CROSS_CFLAGS:=
+CROSS_LDFLAGS:=
 
 SOURCE:=$(shell bash $(UDL)/tools/get_file_list.sh $(SRC) $(TARGETS))
 TEST_SOURCES:=$(wildcard $(PWD)/*.c)
@@ -15,7 +15,7 @@ INCLUDES:=-I$(SRC)/generic
 
 define compile_object
 $(1):$(2)
-	$(CROSS)gcc -Wall $(CROSS_CFLGAS) -c $(INCLUDES) $(2) -o $(1)
+	$(CROSS)gcc -Wall $(CROSS_CFLAGS) -c $(INCLUDES) $(2) -o $(1)
 endef
 
 define get_base
@@ -34,7 +34,7 @@ $(BUILD):
 $(TEST_SOURCES) : $(BUILD)
 
 test: $(TEST_SOURCES) $(OBJS)
-	$(CROSS)gcc -Wall $(INCLUDES) $(CROSS_CFLGAS) $(CROSS_LDFLGAS) -o $@ $^
+	$(CROSS)gcc -Wall $(INCLUDES) $(CROSS_CFLAGS) $(CROSS_LDFLAGS) -o $@ $^
 
 clean:
 	rm -rf $(BUILD)
