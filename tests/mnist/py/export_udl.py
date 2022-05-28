@@ -38,11 +38,5 @@ for k, v in state_dict.items():
     cs += save_array(k, np_array) + "\n"
     np.save(k + '.udl', np_array)
 
-im_data = load_image()
-im_data = im_data.numpy().transpose(0, 2, 3, 1)
-# print(im_data)
-cs += save_array('im_data.bin', im_data) + "\n"
-np.save('im_data.udl', im_data)
-
 with open('data.c', 'w') as fp:
     fp.write(cs)

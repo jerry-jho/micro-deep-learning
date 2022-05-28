@@ -1,11 +1,11 @@
 import torch.nn.functional as f
-import torch
+from img import load_image
 import numpy as np
 import npy_nn
 import sys
 np.set_printoptions(threshold=sys.maxsize)
 
-im_data = np.load('im_data.udl.npy')
+im_data = load_image()
 
 conv0_weight = np.load('conv0.0.weight.udl.npy')
 conv0_bias = np.load('conv0.0.bias.udl.npy')
