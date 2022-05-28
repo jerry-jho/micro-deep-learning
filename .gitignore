@@ -3,4 +3,4 @@ test
 build
 tests/mnist/py/data
 *.npy
-tests/resnet50
+*.log

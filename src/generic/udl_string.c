@@ -2,8 +2,8 @@
 
 #include <stdarg.h>
 
-static uint64_t __pow(int x,int y) {
-  uint64_t sum = 1;
+static l_t __pow(int x,int y) {
+  l_t sum = 1;
   while(y--) {
     sum *= x;
   }
@@ -63,48 +63,40 @@ static int __print_int_hex(int dec) {
 }
 
 static int __print_float(float flt) {
-  int countint = 0,countflt = 0;
+  int scount = 0, countint = 0,countflt = 0;
   int count = 0, r_val = 0;
   int tmpint;
   int tmpflt;
 
   if (flt < 0) {
     udl_putc('-');
-    count ++;  
-    flt = -1 * flt;  
-  }
-
-  if (flt < 1.0) {
-    udl_putc('0');
-    count ++;
+    flt = -1 * flt;
+    scount = 1;  
   }
   tmpint = (int)flt;
-  tmpflt = (long int)(10000000 * (flt - tmpint));
+  tmpflt = (long int)(100000000 * (flt - tmpint));
   if(tmpflt % 10 >= 5) {
     tmpflt = tmpflt / 10 + 1;
   } else {
     tmpflt = tmpflt / 10;
   }
   r_val = tmpflt;
-
+  
   while(r_val) {
     count++;
     r_val /= 10;
   }
 
-  if (tmpint != 0) {
-    countint = __print_int(tmpint);
-  }
+  countint = __print_int(tmpint);
   udl_putc('.');
-  int i = 0;
-  
-  for(i = 0; i < 7 - count; i++) {
+ 
+  for(int i = 0; i < 7 - count; i++) {
     udl_putc('0');
   }
   if (tmpflt != 0) {
     countflt = __print_int(tmpflt);
   }
-  return countint + 1 + count + countflt;
+  return scount + countint + 1 + count + countflt;
 }
 
 int udl_printf(const char *str, ...) {

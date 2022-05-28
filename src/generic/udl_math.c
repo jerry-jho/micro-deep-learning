@@ -26,6 +26,16 @@ m_t mul_mam(m_t a, a_t b) {
   return a * b;
 }
 
+m_t div_mim(m_t a, s_t b) {
+  if (b != 0) return a / b;
+  return 0;
+}
+
+m_t div_mmm(m_t a, m_t b) {
+  if (b != 0) return a / b;
+  return 0;
+}
+
 m_t mac_mam(m_t a, a_t s, a_t b) {
   return a*s+b;
 }
@@ -52,6 +62,11 @@ m_t max_mmm(m_t a, m_t b) {
 
 m_t min_mmm(m_t a, m_t b) {
   return a > b ? b : a;
+}
+
+m_t exp_mmm(m_t a) {
+  unsigned int i=(1<<23)*(1.4426950409f*((double)a)+126.94201519f);
+  return *((float *)(&i));
 }
 
 #endif

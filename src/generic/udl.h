@@ -2,17 +2,19 @@
 #define __UDL_H
 
 /* C Basic */
-#include <stdint.h>
 #ifndef NULL
 #define NULL ((void *)0)
 #endif
 
-void * udl_malloc(uint64_t size);
+typedef unsigned int s_t;
+typedef unsigned long long l_t;
+
+void * udl_malloc(l_t size);
 void udl_free(void * v);
-void udl_memcpy(void * dst, void * src, uint64_t size);
+void udl_memcpy(void * dst, void * src, l_t size);
 /* API Basic */
 
-typedef int16_t result_t;
+typedef int result_t;
 #define RESULT_OK                         0
 #define RESULT_ERROR_SHAPE_MISMATCH     -21
 #define RESULT_ERROR_SHAPE_ZERO         -22
@@ -23,7 +25,7 @@ typedef int16_t result_t;
 /* IO Basic */
 void udl_putc(char c);
 int udl_puts(char * s);
-result_t udl_load(void ** dest, uint64_t trunk, uint64_t count, void * source);
+result_t udl_load(void ** dest, l_t trunk, l_t count, void * source);
 int udl_printf(const char *str, ...);
 
 /* Math Basic */
@@ -40,22 +42,25 @@ m_t int_m(int x);
 m_t mul_mmm(m_t a, m_t b);
 a_t mul_maa(m_t a, a_t b);
 m_t mul_mam(m_t a, a_t b);
+m_t div_mim(m_t a, s_t b);
+m_t div_mmm(m_t a, m_t b);
 m_t mac_mam(m_t a, a_t s, a_t b);
 m_t add_mmm(m_t a, m_t b);
 m_t sub_mmm(m_t a, m_t b);
 m_t abs_mmm(m_t a);
 m_t max_mmm(m_t a, m_t b);
 m_t min_mmm(m_t a, m_t b);
+m_t exp_mmm(m_t a);
 
 /* Vector Math Basic */
 typedef m_t (* fmm_t)(m_t);
 typedef m_t (* fmmm_t)(m_t, m_t);
-void vec_mm(fmm_t f, m_t * a, m_t * c, uint64_t size);
-void vec_mmm(fmmm_t f, m_t * a, m_t * b, m_t * c, uint64_t size);
-m_t mac_mmm(m_t * a, m_t * b, uint64_t size);
+void vec_mm(fmm_t f, m_t * a, m_t * c, l_t size);
+void vec_mmm(fmmm_t f, m_t * a, m_t * b, m_t * c, l_t size);
+m_t mac_mmm(m_t * a, m_t * b, l_t size);
 /* Tensor Basic */
 
-typedef uint32_t s_t;
+
 
 typedef enum {
   type_main,
@@ -97,7 +102,7 @@ tensor4d_t udl_tensor_from_buffer(s_t B, s_t H, s_t W, s_t C, type_t ttype, void
 result_t udl_tensor_reshape(tensor4d_t * s, s_t B, s_t H, s_t W, s_t C);
 s_t udl_tensor_argmax(tensor4d_t * s);
 void udl_tensor_print(tensor4d_t * t);
-void udl_m_print(m_t * t, uint64_t size);
+void udl_m_print(m_t * t, l_t size);
 /* Active Basic */
 
 typedef enum {
@@ -125,11 +130,17 @@ typedef struct _desc_t {
 
 typedef desc_t conv2d_desc_t;
 typedef desc_t maxpooling2d_desc_t;
+typedef desc_t avgpooling2d_desc_t;
+typedef desc_t batch_normalization_desc_t;
 typedef desc_t dense_desc_t;
+typedef desc_t add_desc_t;
 
 result_t udl_conv2d_layer(conv2d_desc_t desc,tensor4d_t * ofm, tensor4d_t * ifm, tensor4d_t * ker, tensor4d_t *vbs);
+result_t udl_batch_normalization_layer(batch_normalization_desc_t desc, tensor4d_t * ofm, tensor4d_t * ifm, tensor4d_t *vbs);
 result_t udl_dense_layer(dense_desc_t desc,tensor4d_t * ofm, tensor4d_t * ifm, tensor4d_t * ker, tensor4d_t *vbs);
 result_t udl_maxpooling2d_layer(maxpooling2d_desc_t desc, tensor4d_t * ofm, tensor4d_t * ifm, tensor4d_t *vbs);
-result_t udl_add_layer(active_t active,tensor4d_t * ifm0, tensor4d_t * ifm1, tensor4d_t * ofm);
+result_t udl_avgpooling2d_layer(avgpooling2d_desc_t desc, tensor4d_t * ofm, tensor4d_t * ifm, tensor4d_t *vbs);
+result_t udl_add_layer(add_desc_t desc, tensor4d_t * ofm, tensor4d_t * ifm0, tensor4d_t * ifm1);
+result_t udl_softmax_layer(tensor4d_t * ofm, tensor4d_t * ifm);
 
 #endif

@@ -4,9 +4,9 @@ import numpy as np
 from img import load_image
 
 
-def save_array(filename, array):
+def save_array(name, array):
     array = array.astype(np.float32).reshape(array.size)
-    s = 'float %s[] = {' % filename.replace('.', '_')
+    s = 'float %s[] = {' % name.replace('.', '_')
     sa = [str(x) for x in array]
     s += ','.join(sa) + '};'
     return s

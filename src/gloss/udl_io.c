@@ -2,7 +2,7 @@
 #include <stdio.h>
 #include <string.h>
 
-result_t udl_load(void ** dest, uint64_t trunk, uint64_t count, void * source) {
+result_t udl_load(void ** dest, l_t trunk, l_t count, void * source) {
   *dest = source;
   return RESULT_OK;
 }

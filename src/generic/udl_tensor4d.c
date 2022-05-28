@@ -145,13 +145,28 @@ void udl_tensor_print(tensor4d_t * t) {
   udl_printf("=== tensor[%d,%d,%d,%d] ===\n",
    (int)t->shape[0], (int)t->shape[1], (int)t->shape[2], (int)t->shape[3]);
   s_t size = tensor4d_size(t);
-  udl_m_print(t->m, size);
-  udl_printf("\n");
+  s_t count = t->shape[0] * t->shape[1] * t->shape[2];
+  udl_printf("[");
+  if (count == 1) {
+    udl_m_print(t->m, size);
+  } else {
+    udl_printf("\n");
+    m_t * m = t->m;
+    for (s_t n = 0;n<t->shape[0] * t->shape[1];n++) {
+      for (s_t l = 0;l<t->shape[2];l++) {
+        udl_printf("  [");
+        udl_m_print(m, t->shape[3]);
+        udl_printf("]\n");
+        m += t->shape[3];
+      }
+      udl_printf("\n");
+    }
+  }
+  udl_printf("]\n");
 }
 
-void udl_m_print(m_t * m, uint64_t size) {
+void udl_m_print(m_t * m, l_t size) {
   for (s_t i=0;i<size;i++) {
     udl_printf("%f ",(double)m[i]);
   }
-  udl_printf("\n");
 }

@@ -3,14 +3,14 @@
 
 #define __VEC_COUNT 8
 
-m_t mac_mmm(m_t * a, m_t * b, uint64_t size) {
+m_t mac_mmm(m_t * a, m_t * b, l_t size) {
   m_t r = 0;
   float i0[__VEC_COUNT] __attribute__((aligned (32)));
   float i1[__VEC_COUNT] __attribute__((aligned (32)));
   float  o[__VEC_COUNT] __attribute__((aligned (32)));
-  uint64_t idx = 0;
-  for (uint64_t i=0;i<size;i+=__VEC_COUNT) {
-    for (uint64_t j=0;j<__VEC_COUNT;j++) {
+  l_t idx = 0;
+  for (l_t i=0;i<size;i+=__VEC_COUNT) {
+    for (l_t j=0;j<__VEC_COUNT;j++) {
       if (idx < size) {
         i0[j] = a[idx];
         i1[j] = b[idx];
@@ -24,7 +24,7 @@ m_t mac_mmm(m_t * a, m_t * b, uint64_t size) {
     __m256 v1 = _mm256_load_ps(i1);
     __m256 v  = _mm256_mul_ps(v0, v1);
     _mm256_store_ps(o, v);
-    for (uint64_t j=0;j<__VEC_COUNT;j++) {
+    for (l_t j=0;j<__VEC_COUNT;j++) {
       r = add_mmm(r, o[j]);
     }
   }
