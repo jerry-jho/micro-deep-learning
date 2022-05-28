@@ -8,7 +8,7 @@ result_t udl_load(void ** dest, l_t trunk, l_t count, void * source) {
 }
 
 void udl_putc(char c) {
-  printf("%c", c);
+  putc(c, stdout);
 }
 
 int udl_puts(char * s) {

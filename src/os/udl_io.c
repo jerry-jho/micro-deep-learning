@@ -19,10 +19,6 @@ void udl_putc(char c) {
 }
 
 int udl_puts(char * s) {
-  int i = 0;
-  while(*s) {
-    udl_putc(*s++);
-    i++;
-  }
-  return i;
+  printf("%s", s);
+  return strlen(s);
 }
