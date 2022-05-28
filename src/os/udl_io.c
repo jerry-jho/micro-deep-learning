@@ -1,5 +1,6 @@
 #include <udl.h>
 #include <stdio.h>
+#include <string.h>
 
 result_t udl_load(void ** dest, l_t trunk, l_t count, void * source) {
   FILE * p = fopen((const char *)source, "r");
